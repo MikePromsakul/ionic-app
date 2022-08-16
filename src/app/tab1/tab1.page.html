@@ -1,0 +1,125 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab1
+      
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title> เพิ่มข้อมูลสมาชิก  </ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+      <form [formGroup]="frmExample" (ngSubmit)="onSubmit()">
+
+        <ion-item>
+          <ion-label>Firstname : </ion-label>
+          <ion-input formControlName="firstname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Lastname : </ion-label>
+          <ion-input formControlName="lastname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Email : </ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Password : </ion-label>
+          <ion-input formControlName="password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-button type="submit"> บันทึก </ion-button>
+          <ion-button type="reset"> ยกเลิก </ion-button>
+        </ion-item>
+
+      </form>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> ผลการบันทึกข้อมูล </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item *ngFor="let item of database; let i = index">
+        <ion-label>
+          {{ i }}
+          <ion-icon name="information-circle-outline"></ion-icon>
+          ชื่อ : {{item.firstname}} <br>
+          <ion-icon name="document-text-outline"></ion-icon>
+          นามสกุล : {{ item.lastname }} <br>
+          <ion-icon name="document-text-outline"></ion-icon>
+          อีเมล : {{ item.email }} <br>
+
+        </ion-label>
+        <ion-button (click)="onEdit(i,item.firstname,item.lastname,item.email)">แก้ไข</ion-button>
+        <ion-button (click)="onDelete(i)">ลบ</ion-button>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card *ngIf="oneditfrm">
+    <ion-card-header>
+      
+      <ion-card-title> ตัวอย่าง Ionic form แก้ไข </ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+      <form [formGroup]="frmEditExample" (ngSubmit)="onUpdate()">
+
+        <ion-item>
+          <ion-label>Firstname : </ion-label>
+          <ion-input formControlName="firstname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Lastname : </ion-label>
+          <ion-input formControlName="lastname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Email : </ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input formControlName="key"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-button type="submit"> บันทึก </ion-button>
+          <ion-button type="reset"> ยกเลิก </ion-button>
+        </ion-item>
+
+      </form>
+      
+    </ion-card-content>
+    
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-button (click)="logout()">ออกจากระบบ</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
